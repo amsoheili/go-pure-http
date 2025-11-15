@@ -59,7 +59,9 @@ func respond(conn net.Conn, bodyStr string) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<div>` + bodyStr + `</div></body></html>`
+<div>` + bodyStr +
+		`<br><a href="/talk">talk</a><br><a href="/sing">sing</a>` +
+		`</div></body></html>`
 
 	fmt.Fprintf(conn, "HTTP/1.1 200 OK\r\n")
 	fmt.Fprintf(conn, "Content-Length: %d\r\n", len(body))
