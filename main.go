@@ -23,7 +23,15 @@ func main() {
 
 func handle(conn net.Conn) {
 	uri := request(conn)
-	respond(conn, uri)
+	fmt.Println(uri)
+	switch uri {
+	case "/talk":
+		respond(conn, "hello babe")
+	case "/sing":
+		respond(conn, "I'm gonna take my horse to the old town road ...")
+	default:
+		respond(conn, "I don't know the route")
+	}
 }
 
 func request(conn net.Conn) string {
@@ -58,4 +66,5 @@ func respond(conn net.Conn, bodyStr string) {
 	fmt.Fprintf(conn, "Content-Type: text/html\r\n")
 	fmt.Fprintf(conn, "\r\n")
 	fmt.Fprintf(conn, body)
+	conn.Close()
 }
